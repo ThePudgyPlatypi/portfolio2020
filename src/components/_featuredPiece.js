@@ -7,7 +7,7 @@ const featuredPiece = ( {piece} ) => {
                 <div class="xy-grid">
                     <div class="cell small-12 medium-4">
                         <div class="featured image">
-                            <img src=""
+                            <img src="../assests/images/{}" />
                         </div>
                     </div>
 
