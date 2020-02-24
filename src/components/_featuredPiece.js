@@ -4,18 +4,18 @@ const featuredPiece = ( {piece} ) => {
     if(piece.featured) {
         return ( 
             <>
-                <div class="xy-grid">
-                    <div class="cell small-12 medium-4">
-                        <div class="featured image">
-                            <img src="../assests/images/{}" />
+                <div className="grid-x grid-margin-x grid-padding-x align-middle featured-wrapper">
+                    <div className="cell small-12 medium-5 featured-image-wrapper">
+                        <div className="featured-image">
+                            <img src={piece.images.thumbnail} alt={piece.alt}/>
                         </div>
                     </div>
 
-                    <div class="cell small-12 medium-8">
-                        <h2>
+                    <div className="cell small-12 medium-7 featured-desc-wrapper">
+                        <h2 className="featured-title">
                             {piece.title};
                         </h2>
-                        <p>
+                        <p className="featured-desc">
                             { piece.shortDescription }
                         </p>
                     </div>

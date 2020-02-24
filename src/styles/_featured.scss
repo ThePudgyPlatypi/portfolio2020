@@ -1,0 +1,25 @@
+.featured-link {
+    color: $primary;
+}
+
+.featured-wrapper {
+    .featured-image-wrapper {
+        display: flex;
+        justify-content: center;
+
+        .featured-image {
+            max-width: 200px;
+        }
+    }
+
+    .featured-desc-wrapper {
+        .featured-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .featured-desc {
+            font-size: .8rem;
+        }
+    }
+}

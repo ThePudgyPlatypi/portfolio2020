@@ -1,15 +1,27 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.scss';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
 import HomePage from './pages/HomePage';
-// import NavBar from './navBar';
+import WebPage from './pages/WebPage';
+import PiecePage from './pages/PiecePage';
+
 
 function App() {
   return (
-    <div class="body">
-      {/* <NavBar /> */}
-      <HomePage />
-    </div>
+    <Router>
+      <div className="body">
+        {/* <NavBar /> */}
+        <Switch>
+          <Route path="/" component={HomePage} exact/>
+          <Route path="/web" component={WebPage} />
+          <Route path="/piece/:name" component={PiecePage} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
