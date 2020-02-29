@@ -13,7 +13,7 @@ const featuredPiece = ( {piece} ) => {
 
                     <div className="cell small-12 medium-7 featured-desc-wrapper">
                         <h2 className="featured-title">
-                            {piece.title};
+                            {piece.title}
                         </h2>
                         <p className="featured-desc">
                             { piece.shortDescription }

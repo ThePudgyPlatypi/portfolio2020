@@ -21,22 +21,10 @@ const siteContent = [
     }, {
         pieces: [
             {
-                name: "example-one",
-                title: "Featured Piece Example",
+                name: "crg-web",
+                title: "Critical Response Group Site",
                 images: {
-                    thumbnail: "/assets/images/redline-logo.jpg",
-                    list: []
-                },
-                alt: "Redline Motorcycles Website",
-                shortDescription: "A Motorcycle and ATV service shop located out in South Jersey was looking to update their online presense. Far above a simple webpage redesign I helped them define their design language, and social media presense across multiple networks.",
-                longDescription: ["",""],
-                features: [],
-                featured: true
-            }, {
-                name: "example-two",
-                title: "Featured Piece Example 2",
-                images: {
-                    thumbnail: "/assets/images/CRGthumb.jpg",
+                    thumbnail: "/CRGthumb.png",
                     list: []
                 },
                 alt: "Critical Response Group Website",
@@ -45,13 +33,28 @@ const siteContent = [
                 features: [],
                 featured: true
             }, {
-                name: "example-three",
-                title: "not Featured Piece Example 2",
-                images: [],
-                shortDescription: "",
+                name: "redline-web",
+                title: "Redline Motorcycles",
+                images: {
+                    thumbnail: "/redline-logo.png",
+                    list: []
+                },
+                alt: "Redline Motorcycles Website",
+                shortDescription: "A Motorcycle and ATV service shop located out in South Jersey was looking to update their online presense. Far above a simple webpage redesign I helped them define their design language, and social media presense across multiple networks.",
                 longDescription: ["",""],
                 features: [],
-                featured: false
+                featured: true
+            }, {
+                name: "trg-web",
+                title: "The Rodgers Group",
+                images: {
+                    thumbnail: "/Logo-Blue.png",
+                    list: []
+                },
+                shortDescription: "The Rodgers Group is a law enforcement consulting and policy creation company. They asked me to redesign their web presense in an effort to try and rebrand themselves for the modern web.",
+                longDescription: ["",""],
+                features: [],
+                featured: true
             }
         ]
     }, {

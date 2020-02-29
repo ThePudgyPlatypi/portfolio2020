@@ -1,21 +1,39 @@
 .featured-link {
-    color: $primary;
+    color: $dark;
+
+    &:hover {
+        color: $dark;
+    }
 }
 
 .featured-wrapper {
+    background-color: $white;
+    margin: 20px;
+    min-height: 200px;
+
     .featured-image-wrapper {
         display: flex;
         justify-content: center;
+        position: relative;
+        overflow: hidden;
+        // height: 200px;
+        // width: 200px;
 
         .featured-image {
-            max-width: 200px;
+            // position: absolute;
+            top: 0;
+            right: 0;
+            // height: 200%;
+            // width: auto;
         }
     }
 
     .featured-desc-wrapper {
+
         .featured-title {
             font-size: 1.1rem;
             font-weight: bold;
+            color: $accent1;
         }
 
         .featured-desc {
