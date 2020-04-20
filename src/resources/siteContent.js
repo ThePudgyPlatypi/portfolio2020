@@ -3,6 +3,7 @@ const siteContent = [
         pages: [
             {
                 name: 'home',
+                title: 'Home',
                 images: [],
                 content: {
                     about: [
@@ -11,9 +12,24 @@ const siteContent = [
                         "Design, to me, is the ability to take a complexity, pull out its essence, and bring it to life in a medium. Design is in all things creative."
                     ]
                 }
-            },
-            {
+            }, {
                 name: 'web',
+                title: 'Web',
+                images: [],
+                content: []
+            }, {
+                name: 'art',
+                title: 'Art',
+                images: [],
+                content: []
+            }, {
+                name: 'design',
+                title: 'Design',
+                images: [],
+                content: []
+            }, {
+                name: 'music',
+                title: 'Music',
                 images: [],
                 content: []
             }

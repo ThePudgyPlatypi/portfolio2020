@@ -14,6 +14,7 @@ import {ReactComponent as Bottom} from './assets/images/R_letter.svg';
 import {ReactComponent as Right} from './assets/images/C_letterdark.svg';
 import {ReactComponent as Top} from './assets/images/R_letterdark.svg';
 import {ReactComponent as Back} from './assets/images/S_letterdark.svg';
+import content from './resources/siteContent';
 
 const NavBar = () => {
 
@@ -82,71 +83,30 @@ const NavBar = () => {
     return (
         <nav>
             <div id="cube-container">
-                <div id="cube">
-            {/* <!--                    the viewable sides of the cube--> */}
-                    <Front id="front"/>
-                    <Left id="left"/>
-                    <Bottom id="bottom"/>
-            {/* <!--                    this is where the header begins--> */}
-                    <header>
-                        <div id="heading">
-                            <span className="slideElement">C</span>
-                            <span className="slideElement">H</span>
-                            <span className="slideElement">R</span>
-                            <span className="slideElement">I</span>
-                            <span className="slideElement">S</span>
-                            <span className="slideElement">&nbsp;</span>
-                            <span className="slideElement">S</span>
-                            <span className="slideElement">T</span>
-                            <span className="slideElement">E</span>
-                            <span className="slideElement">H</span>
-                            <span className="slideElement">M</span>
+                <div id="cube" onMouseEnter={(e) => verticalReveal(e, 100)} onMouseLeave={(e) => verticalClose(e, 100)}>
+                    <header className="nav">
+                        <div>
+                            <span className="slideElement">CHRIS STEHM</span>
                         </div>
                     </header>
-            {/* <!--                    this is where the nav begins--> */}
                     <div id="nav">
-                        <span className="slideElement navLink">
-                            <span className="slideNavElement" id="navSpacer"></span>
-                        </span>
-                        <span className="slideElement navLink">
-                            <a href="#code">
-                                <span className="slideNavElement">c</span>
-                                <span className="slideNavElement">o</span>
-                                <span className="slideNavElement">d</span>
-                                <span className="slideNavElement">e</span>
-                            </a>
-                        </span>
-                        <span className="slideElement navLink">
-                            <a href="#drawing">
-                                <span className="slideNavElement">d</span>
-                                <span className="slideNavElement">r</span>
-                                <span className="slideNavElement">a</span>
-                                <span className="slideNavElement">w</span>
-                            </a>
-                        </span>
-                        <span className="slideElement navLink">
-                            <a href="#design">
-                                <span className="slideNavElement">d</span>
-                                <span className="slideNavElement">e</span>
-                                <span className="slideNavElement">s</span>
-                                <span className="slideNavElement">i</span>
-                                <span className="slideNavElement">g</span>
-                                <span className="slideNavElement">n</span>
-                            </a>
-                        </span>
-                        <span className="slideElement navLink">
-                            <a href="#music">
-                                <span className="slideNavElement">p</span>
-                                <span className="slideNavElement">l</span>
-                                <span className="slideNavElement">a</span>
-                                <span className="slideNavElement">y</span>
-                            </a>
-                        </span>
+                        { content[0].pages.map( function (page, key) {
+                            return (
+                                <span key={key} className="slideElement navLink">
+                                    <Link to={`/${page.name}`}>
+                                        <span className={`slideNavElement ${page.name}-link`}>{page.title}</span>
+                                    </Link>                                
+                                </span>
+                            );
+                        })}
                     </div>
-            {/* <!--                    these are the backsides of the cube--> */}
-                    <Right id="right" />
-                    <Top id="top" />
-                    <Back id="back" />
+            {/* <!-- sides of the cube--> */}
+                    <Front className="cube-face" id="front"/>
+                    <Left className="cube-face" id="left"/>
+                    <Bottom className="cube-face" id="bottom"/>
+                    <Right className="cube-face" id="right" />
+                    <Top className="cube-face" id="top" />
+                    <Back className="cube-face" id="back" />
                 </div>
             </div>
         </nav>
