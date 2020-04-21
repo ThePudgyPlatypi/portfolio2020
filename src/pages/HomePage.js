@@ -3,7 +3,7 @@ import Featured from '../components/_featureList';
 import content from '../resources/siteContent';
 import IconList from '../components/_iconList';
 
-const Home = () => {
+const Home = ({ match }) => {
     const desc = content[0].pages.find(desc => desc.name === "home");
 
     return (
@@ -27,7 +27,7 @@ const Home = () => {
                     </div>
 
                     <div className="cell small-12 medium-6">
-                        <Featured content={content} />
+                        <Featured match={match}/>
                     </div>
                 </div>
             </div>
