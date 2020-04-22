@@ -12,6 +12,7 @@ import DesignPage from './pages/DesignPage';
 import MusicPage from './pages/MusicPage';
 import PiecePage from './pages/PiecePage';
 import NavBar from './navBar'
+import AdminPage from './pages/AdminPage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/music" component={MusicPage} />
           <Route path="/design" component={DesignPage} />
           <Route path="/piece/:name" component={PiecePage} />
+          <Route path="/cs-admin" component={AdminPage} />
         </Switch>
       </div>
     </Router>
