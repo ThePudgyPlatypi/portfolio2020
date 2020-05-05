@@ -6,26 +6,26 @@ const AdminPage = ({ match }) => {
     // need to be able to update basic information on each page
     // will need to be able to update skills and resume stuff
     const name = match.params.name;
+    const [isLoading, setIsLoading] = useState(false);
     const [pieces, setPieces ] = useState([{}]);
     const [pieceKeys, setPieceKeys ] = useState([{}]);
 
+    const fetchData = async (url, stateSetter) => {
+        const rawData = await fetch(url);
+        const parseData = await rawData.json();
+        stateSetter(parseData);
+    }
+
     useEffect( () => {
-        const fetchData = async () => {
-            const pieces = await fetch(`/api/pieces`);
-            const pieceKeys = await fetch(`/api/piece-keys`);
-            const piecesResults = await pieces.json();
-            const pieceKeysResults = await pieceKeys.json();
-            
-            setPieces(piecesResults);
-            setPieceKeys(pieceKeysResults);
-        }
-        fetchData();
-    }, [name]);
+        setIsLoading(true);
+        fetchData('/api/pieces', setPieces);
+        fetchData('/api/piece-keys', setPieceKeys);
+        setIsLoading(false);
+    }, []);
+
 
     return (
-        <>
-             <PieceAdmin pieces = { pieces } pieceKeys = { pieceKeys } />
-        </>
+        isLoading ? <div className="loading">Loading...</div> : <PieceAdmin pieces = { pieces } pieceKeys = { pieceKeys } />
     );
 };
 

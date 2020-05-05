@@ -1,41 +1,67 @@
 import React from 'react';
+import { parseData } from '../helpers/parseData';
 
-const PieceAdmin = ( { pieces, pieceKeys } ) => {
+class PieceAdmin extends React.Component {
+    render() {
+        const pieces = this.props.pieces;
+        const pieceKeys = this.props.pieceKeys;
 
-    return (
-        <>  
-            <div className="grid-container">
-                <div className="grid-x">
-                    <table>
-                        <thead>
-                            <tr>
-                                {
-                                    pieceKeys.map( (piece, key) => (
-                                        <th key={key}>{ piece.toString() }</th>
-                                    ))
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { pieces.map( (piece, key) => (
-                                    <tr key={key} >
-                                        <td>{piece._id}</td>
-                                        <td>{piece.alt}</td>
-                                        <td>{piece.featured}</td>
-                                        <td>{piece.features}</td>
-                                        {/* <td>{piece.images}</td> */}
-                                        {/* <td>{piece.longDescription}</td> */}
-                                        {/* <td>{piece.name}</td> */}
-                                        {/* <td>{piece.shortDescription}</td> */}
-                                        {/* <td>{piece.title}</td> */}
-                                    </tr>
+        return (
+            <>  
+                <div className="grid-container">
+                    <div className="grid-x">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Title</th>
+                                    <th>Images</th>    
+                                    <th>Alt Text</th>
+                                    <th>Short Description</th>
+                                    <th>Long Description</th>
+                                    <th>Features</th>
+                                    <th>Featured?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { pieces.map( (piece, key) => (
+                                    <PieceListRow piece={piece} key={key} />
                                 )) }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </>
-    );
-};
+            </>
+        );
+    }
+}
+
+class PieceListRow extends React.Component {
+    render() {
+        const piece = this.props.piece;
+        
+        return (
+            <tr>
+                <PieceListItem pieceItem={piece} />
+            </tr>
+        );
+    }
+}
+
+class PieceListItem extends React.Component {
+    render() {
+        const pieceItem = this.props.pieceItem;
+
+        return (
+            <>
+                { Object.values(pieceItem).map( (item, key) => (
+                    <td key={key}> <p> { parseData(item) } </p> </td>
+                ) ) }
+
+            </>
+        );
+    }
+}
 
 export default PieceAdmin;
