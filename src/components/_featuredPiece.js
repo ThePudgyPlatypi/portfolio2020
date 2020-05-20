@@ -1,30 +1,47 @@
-import React from 'react';
+import React from "react";
+import {
+  Grid,
+  Typography,
+  CardMedia,
+} from "@material-ui/core";
+import {  makeStyles } from '@material-ui/core/styles';
 
-const featuredPiece = ( {piece} ) => {
-    if(piece.featured) {
-        return ( 
-            <>
-                <div className="grid-x grid-margin-x grid-padding-x align-middle featured-wrapper">
-                    <div className="cell small-12 medium-5 featured-image-wrapper">
-                        <div className="featured-image">
-                            <img src={piece.images.thumbnail} alt={piece.alt}/>
-                        </div>
-                    </div>
+const useStyles = makeStyles({
+  featured_image: {
+    height: 300,
+    objectFit: 'contain',
+  },
+});
 
-                    <div className="cell small-12 medium-7 featured-desc-wrapper">
-                        <h2 className="featured-title">
-                            {piece.title}
-                        </h2>
-                        <p className="featured-desc">
-                            { piece.shortDescription }
-                        </p>
-                    </div>
-                </div>
-            </>
-        );
-    } else {
-        return null;
-    };
+const FeaturedPiece = ({ piece }) => {
+  const classes = useStyles();
+
+  if (piece.featured) {
+    return (
+      <>
+        <Grid container spacing={4} alignItems="center">
+          <Grid item md={5} xs={12}>
+            <CardMedia
+              className={classes.featured_image}
+              component="img"
+              title={piece.alt}
+              image={piece.images.thumbnail}
+            />
+          </Grid>
+
+          <Grid item md={7} xs={12}>
+            <Typography variant="h4" color="initial">
+              {piece.title}
+            </Typography>
+            <Typography variant="body2" color="initial">
+              {piece.shortDescription}
+            </Typography>
+          </Grid>
+        </Grid>
+      </> )
+  } else {
+    return null;
+  }
 };
 
-export default featuredPiece;
+export default FeaturedPiece;

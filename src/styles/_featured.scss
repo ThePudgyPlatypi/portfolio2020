@@ -6,10 +6,14 @@
     }
 }
 
+.featured-image {
+    min-height: 200px;
+}
+
 .featured-wrapper {
     background-color: $white;
     margin: 20px;
-    min-height: 200px;
+    
 
     .featured-image-wrapper {
         display: flex;
@@ -19,13 +23,7 @@
         // height: 200px;
         // width: 200px;
 
-        .featured-image {
-            // position: absolute;
-            top: 0;
-            right: 0;
-            // height: 200%;
-            // width: auto;
-        }
+        
     }
 
     .featured-desc-wrapper {
