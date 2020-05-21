@@ -14,7 +14,7 @@ const UpdateRichText = ({ id, keyVal, value }) => {
     <>
       <Editor
         apiKey="f9rkgdsq6apwm7ad6n6g6hy5e19p3h01hn8oecwx9aiql4vi"
-        initialValue={longDesc.toString()}
+        initialValue={longDesc ? longDesc.toString() : "" }
         init={{
           document_base_url: `${process.env.PUBLIC_URL}`,
           skin_url: `${process.env.PUBLIC_URL}`,

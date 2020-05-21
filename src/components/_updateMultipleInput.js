@@ -8,7 +8,7 @@ class UpdateMultipleInput extends React.Component {
       features.push("Dummy");
     }
 
-    return features.map((value, key) => <p key={key}>{value.name}-feature</p>);
+    return features ? features.map((value, key) => <p key={key}>{value.name}-feature</p>) : "There are no features yet";
   }
 }
 

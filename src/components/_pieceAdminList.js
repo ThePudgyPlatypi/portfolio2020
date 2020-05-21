@@ -7,16 +7,16 @@ import UpdateImageGrid from "./_udpateImageGrid";
 import UpdateRichText from "./_udpateRichText";
 import GetKeyByValue from "../helpers/getKeyByValue";
 import UpdateMultipleInput from "./_updateMultipleInput";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 
-const PieceAdminListColumn = ({ pieceItem }) => {
+const PieceAdminList = ({ pieceItem }) => {
   return (
     <>
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <UpdateValueInput
             id={pieceItem._id}
-            keyVal={GetKeyByValue(pieceItem, pieceItem.name)}
+            keyVal={pieceItem.name ? GetKeyByValue(pieceItem, pieceItem.name) : "Name"}
             value={pieceItem.name}
           />
         </Grid>
@@ -24,7 +24,7 @@ const PieceAdminListColumn = ({ pieceItem }) => {
         <Grid item xs={6}>
           <UpdateValueText
             id={pieceItem._id}
-            keyVal={GetKeyByValue(pieceItem, pieceItem.title)}
+            keyVal={pieceItem.title ? GetKeyByValue(pieceItem, pieceItem.title) : "Title"}
             value={pieceItem.title}
           />
         </Grid>
@@ -40,19 +40,19 @@ const PieceAdminListColumn = ({ pieceItem }) => {
             wrap="nowrap"
           >
             <Grid item >
-              <UpdateFileUpload imageSRC={pieceItem.images} />
+              <UpdateFileUpload imageSRC={pieceItem.images ? pieceItem.images : "" } />
             </Grid>
           </Grid>
         </Grid>
 
         <Grid item xs={12}>
-          <UpdateImageGrid images={pieceItem.images.list} />
+          <UpdateImageGrid images={ pieceItem.images ? pieceItem.images.list : []} />
         </Grid>
 
         <Grid item xs={6}>
           <UpdateValueText
             id={pieceItem._id}
-            keyVal={GetKeyByValue(pieceItem, pieceItem.alt)}
+            keyVal={pieceItem.alt ? GetKeyByValue(pieceItem, pieceItem.alt) : "alt"}
             value={pieceItem.alt}
           />
         </Grid>
@@ -60,7 +60,7 @@ const PieceAdminListColumn = ({ pieceItem }) => {
         <Grid item xs={6}>
           <UpdateValueText
             id={pieceItem._id}
-            keyVal={GetKeyByValue(pieceItem, pieceItem.shortDescription)}
+            keyVal={pieceItem.shortDescription ? GetKeyByValue(pieceItem, pieceItem.shortDescription) : "Short Description"}
             value={pieceItem.shortDescription}
           />
         </Grid>
@@ -68,7 +68,7 @@ const PieceAdminListColumn = ({ pieceItem }) => {
         <Grid item xs={12}>
           <UpdateRichText
             id={pieceItem._id}
-            keyVal={GetKeyByValue(pieceItem, pieceItem.longDescription)}
+            keyVal={pieceItem.longDescription ? GetKeyByValue(pieceItem, pieceItem.longDescription) : "Long Description"}
             value={pieceItem.longDescription}
           />
         </Grid>
@@ -80,17 +80,17 @@ const PieceAdminListColumn = ({ pieceItem }) => {
         <Grid item xs={6}>
           <UpdateValueCheckbox
             id={pieceItem._id}
-            keyVal={GetKeyByValue(pieceItem, pieceItem.featured)}
-            value={pieceItem.featured}
+            keyVal="featured"
+            value={pieceItem.featured ? pieceItem.featured : false}
           />
         </Grid>
 
         <Grid item xs={12}>
-          <button className="button alert">x</button>
+          <Button>Delete</Button>
         </Grid>
       </Grid>
     </>
   );
 };
 
-export default PieceAdminListColumn;
+export default PieceAdminList;

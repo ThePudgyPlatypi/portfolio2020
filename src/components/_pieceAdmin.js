@@ -1,5 +1,7 @@
 import React from "react";
-import PieceAdminListColumn from "./_pieceAdminListColumn";
+import PieceAdminList from "./_pieceAdminList";
+import { Grid } from "@material-ui/core";
+import CreatePiece from "./_createPiece";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -48,29 +50,13 @@ const PieceAdmin = ({ pieces }) => {
               <Typography className={classes.heading}>{piece.title}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <PieceAdminListColumn pieceItem={piece} />
+              <PieceAdminList pieceItem={piece} />
             </ExpansionPanelDetails>
           </ExpansionPanel>
         ))}
-        {/* <div className="grid-container"> */}
-        {/* <div className="grid-x">
-          <div className="cell small-12">
-            <Accordion data-accordion>
-              {pieces.map((piece, key) => (
-                <AccordionItem key={key}>
-                  <AccordionTitle>{piece.title}</AccordionTitle>
-                  <AccordionContent>
-                    <PieceAdminListRow piece={piece} />
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-          <div className="cell small-12 add-piece">
-            <span className="button success">Add Piece</span>
-          </div>
-        </div> */}
-        {/* </div> */}
+        <Grid container>
+          <CreatePiece></CreatePiece>
+        </Grid>
       </Container>
     </>
   );
