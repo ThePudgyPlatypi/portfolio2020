@@ -18,7 +18,7 @@ const AdminPage = ({ match }) => {
     setIsLoading(false);
   }, []);
 
-  return isLoading ? <Box>Loading...</Box> : <PieceAdmin pieces={pieces} />;
+  return isLoading ? <Box>Loading...</Box> : <PieceAdmin pieces={pieces} setPieces={setPieces} />;
 };
 
 export default AdminPage;

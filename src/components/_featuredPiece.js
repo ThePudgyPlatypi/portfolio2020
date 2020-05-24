@@ -25,7 +25,7 @@ const FeaturedPiece = ({ piece }) => {
               className={classes.featured_image}
               component="img"
               title={piece.alt}
-              image={piece.images.thumbnail}
+              image={piece.images ? piece.images.thumbnail : "" }
             />
           </Grid>
 

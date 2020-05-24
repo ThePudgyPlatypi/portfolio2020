@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
+import FetchData from '../helpers/fetchData';
 
-const UpdateValueInput = () => {
+const UpdateValueInput = ({setPieces}) => {
   const [newPiece, setNewPiece] = useState("");
 
   const createPiece = async () => {
@@ -12,7 +13,8 @@ const UpdateValueInput = () => {
         "Content-Type": "application/json",
       },
     });
-    console.log(newPiece);
+    console.log(result);
+    FetchData("/api/pieces", setPieces);
     setNewPiece('');
   };
 

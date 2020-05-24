@@ -1,7 +1,9 @@
 import Camelize from "./camelize";
 
 export default async function update(id, keyVal, value, callback) {
-  keyVal = Camelize(keyVal);
+  if(keyVal) {
+    keyVal = Camelize(keyVal);
+  }
 
   const result = await fetch(`/api/pieces/${id}/${keyVal}/update-piece`, {
     method: "post",

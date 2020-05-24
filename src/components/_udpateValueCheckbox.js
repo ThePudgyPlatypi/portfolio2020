@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UpdateField from "../helpers/updateField";
 import { Switch } from "@material-ui/core";
+import FetchData from '../helpers/fetchData';
 
-const UpdateValueCheckbox = ({ id, keyVal, value }) => {
+const UpdateValueCheckbox = ({ id, keyVal, value, setPieces }) => {
   const [check, setCheck] = useState(value);
+
+  useEffect(() => {
+    UpdateField(id, keyVal, check);
+    if(setPieces) {
+      FetchData("/api/pieces", setPieces);
+    }
+  }, [check]);
 
   return (
     <>
@@ -14,7 +22,6 @@ const UpdateValueCheckbox = ({ id, keyVal, value }) => {
           id={`${id}-yes-no`}
           onChange={(event) => {
             setCheck(!check);
-            UpdateField(id, keyVal, !check);
           }}
           name="featuredSwitch"
           inputProps={{ "aria-label": "secondary checkbox" }}

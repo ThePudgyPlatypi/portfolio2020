@@ -5,6 +5,10 @@ import { TextField } from "@material-ui/core";
 const UpdateValueInput = ({ id, keyVal, value }) => {
   const [updatedPiece, setUpdatedPiece] = useState(value);
 
+  React.useEffect( (id, keyVal) => {
+    UpdateField(id, keyVal, updatedPiece);
+}, [updatedPiece]);
+
   return (
     <>
       <TextField
@@ -14,9 +18,6 @@ const UpdateValueInput = ({ id, keyVal, value }) => {
         variant="outlined"
         onChange={(event) => {
           setUpdatedPiece(event.target.value);
-        }}
-        onBlur={() => {
-          UpdateField(id, keyVal, updatedPiece);
         }}
       />
     </>

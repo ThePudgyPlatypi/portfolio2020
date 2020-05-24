@@ -9,6 +9,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Container from "@material-ui/core/Container";
+import StarIcon from '@material-ui/icons/Star';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PieceAdmin = ({ pieces }) => {
+const PieceAdmin = ({ pieces, setPieces }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -48,14 +49,15 @@ const PieceAdmin = ({ pieces }) => {
               id={`${piece._id}-header`}
             >
               <Typography className={classes.heading}>{piece.title}</Typography>
+              <Typography className={classes.secondaryHeading}>{piece.featured ? <StarIcon color='primary' /> : ""}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <PieceAdminList pieceItem={piece} />
+              <PieceAdminList pieceItem={piece} setPieces={setPieces} />
             </ExpansionPanelDetails>
           </ExpansionPanel>
         ))}
         <Grid container>
-          <CreatePiece></CreatePiece>
+          <CreatePiece setPieces={setPieces}></CreatePiece>
         </Grid>
       </Container>
     </>
