@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UpdateField from "../helpers/updateField";
 import { TextField } from "@material-ui/core";
 
-const UpdateValueInput = ({ id, keyVal, value }) => {
+const UpdateValueInput = ({ id, keyVal, value, statePasser }) => {
   const [updatedPiece, setUpdatedPiece] = useState(value);
 
-  React.useEffect( (id, keyVal) => {
+  useEffect(() => {
     UpdateField(id, keyVal, updatedPiece);
-}, [updatedPiece]);
+  }, [updatedPiece]);
 
   return (
     <>
@@ -17,7 +17,7 @@ const UpdateValueInput = ({ id, keyVal, value }) => {
         value={updatedPiece}
         variant="outlined"
         onChange={(event) => {
-          setUpdatedPiece(event.target.value);
+          statePasser ? statePasser(event.target.value) : setUpdatedPiece(event.target.value);
         }}
       />
     </>

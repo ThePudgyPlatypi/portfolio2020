@@ -9,7 +9,8 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Container from "@material-ui/core/Container";
-import StarIcon from '@material-ui/icons/Star';
+import StarIcon from "@material-ui/icons/Star";
+import AdminBar from "./_adminBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,7 @@ const PieceAdmin = ({ pieces, setPieces }) => {
   return (
     <>
       <Container maxWidth="lg">
+        <AdminBar />
         {pieces.map((piece, key) => (
           <ExpansionPanel
             key={key}
@@ -48,8 +50,10 @@ const PieceAdmin = ({ pieces, setPieces }) => {
               aria-controls={`${piece._id}-content`}
               id={`${piece._id}-header`}
             >
-              <Typography className={classes.heading}>{piece.title}</Typography>
-              <Typography className={classes.secondaryHeading}>{piece.featured ? <StarIcon color='primary' /> : ""}</Typography>
+              <Typography id={`${piece._id}-title`} className={classes.heading}>{piece.title}</Typography>
+              <Typography className={classes.secondaryHeading}>
+                {piece.featured ? <StarIcon color="primary" /> : ""}
+              </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <PieceAdminList pieceItem={piece} setPieces={setPieces} />

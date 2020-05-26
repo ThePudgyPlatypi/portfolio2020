@@ -4,7 +4,7 @@ export default async function update(id, keyVal, value, callback) {
   if(keyVal) {
     keyVal = Camelize(keyVal);
   }
-
+  
   const result = await fetch(`/api/pieces/${id}/${keyVal}/update-piece`, {
     method: "post",
     body: JSON.stringify({

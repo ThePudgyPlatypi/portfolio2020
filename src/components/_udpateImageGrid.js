@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Button, Grid, GridList, GridListTile } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  GridList,
+  GridListTile,
+  GridListTileBar,
+} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { makeStyles } from "@material-ui/core/styles";
 import updateField from "../helpers/updateField";
 
@@ -14,12 +22,22 @@ const useStyles = makeStyles((theme) => ({
   gridList: {
     width: 500,
     height: 450,
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: "translateZ(0)",
+  },
+  titleBar: {
+    background:
+      "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
+      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+  },
+  icon: {
+    color: "red",
   },
 }));
 
 const UpdateImageGrid = ({ images, id, keyVal }) => {
   const classes = useStyles();
-  const [imgFiles, setImgFiles] = useState("");
+  const [imgFiles, setImgFiles] = useState([]);
   const [uploads, setUploads] = useState(0);
   const [thumbnails, setThumbnails] = useState(images);
 
@@ -45,35 +63,48 @@ const UpdateImageGrid = ({ images, id, keyVal }) => {
       }
 
       postData(`/api/upload`, formData, (result) => {
-        if (uploads) {
-          let paths = thumbnails;
-          result.file.forEach((value, index) => {
-            paths.push(
-              `${process.env.REACT_APP_SERVER}${value.path.substring(6)}`
-            );
-          });
-          let images = paths;
-          console.log(images);
-          updateField(id, "images", images);
-        }
+        console.log(result);
+        result.file.forEach((value, index, array) => {
+          setThumbnails((prevState) => [
+            ...prevState,
+            `${process.env.REACT_APP_SERVER}${value.path.substring(6)}`,
+          ]);
+        });
       });
     }
   }, [uploads]);
 
+  useEffect(() => {
+    updateField(id, keyVal, thumbnails, (body) => {
+      console.log(`parent object after imageArr is stored: ${body}`)
+    });
+  }, [thumbnails]);
+
   return (
     <>
-      <Grid container>
-        <Grid item xs={12}>
-          <GridList cellHeight={160} className={classes.gridList} cols={3}>
-            {Array.isArray(thumbnails)
-              ? thumbnails.map((name, index) => (
-                  <GridListTile key={index} cols={1}>
-                    <img src={name} alt="" />
-                  </GridListTile>
-                ))
-              : ""}
+      <Grid container justify="center">
+        <div className={classes.root}>
+          <GridList cellHeight={150} className={classes.gridList} cols={3}>
+            {Array.isArray(thumbnails) ? thumbnails.map((value, key) => (
+              <GridListTile key={key} cols={1}>
+                <img src={value} alt="" />
+                <GridListTileBar
+                  titlePosition="top"
+                  actionIcon={
+                    <IconButton aria-label={`star`} className={classes.icon} onClick={() => {
+                      // let deleteMe = thumbnails.indexOf(value);
+                      setThumbnails(thumbnails.filter((thumbnail) => thumbnail !== value));
+                    }}>
+                      <DeleteForeverIcon />
+                    </IconButton>
+                  }
+                  actionPosition="left"
+                  className={classes.titleBar}
+                />
+              </GridListTile>
+            )) : []}
           </GridList>
-        </Grid>
+        </div>
 
         <Grid item xs={12}>
           <input
@@ -90,8 +121,10 @@ const UpdateImageGrid = ({ images, id, keyVal }) => {
           <Button
             variant="contained"
             color="primary"
+            type="submit"
             component="span"
             onClick={(event) => {
+              event.preventDefault();
               setUploads(imgFiles);
             }}
           >

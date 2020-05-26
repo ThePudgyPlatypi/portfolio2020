@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import FetchData from "../helpers/fetchData";
-import GetKeyByValue from "../helpers/getKeyByValue";
-import UpdateField from "../helpers/updateField";
 import PieceAdmin from "../components/_pieceAdmin";
 import { Box } from "@material-ui/core";
 

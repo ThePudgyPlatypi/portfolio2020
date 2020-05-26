@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import UpdateValueInputSubmit from "./_updateValueInputSubmit";
+import updateField from "../helpers/updateField";
+import Icon from "@material-ui/core/Icon";
 
-class UpdateMultipleInput extends React.Component {
-  render() {
-    const features = this.props.features;
+const UpdateMultipleInput = ({ id, keyVal, value }) => {
 
-    return features ? features.map((value, key) => <p key={key}>{value.name}-feature</p>) : "There are no features yet";
-  }
-}
+  return (
+    <>
+     
+      <UpdateValueInputSubmit id={id} keyVal={keyVal} value={value} />
+    </>
+  );
+};
 
 export default UpdateMultipleInput;

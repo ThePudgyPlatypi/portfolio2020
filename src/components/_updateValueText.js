@@ -8,9 +8,7 @@ const UpdateValueText = ({ id, keyVal, value, setPieces }) => {
 
   useEffect( () => {
       UpdateField(id, keyVal, updatedPiece);
-      if(setPieces) {
-        FetchData("/api/pieces", setPieces);
-      }
+      if(keyVal === "Title") { document.getElementById(`${id}-title`).textContent = updatedPiece; }
   }, [updatedPiece]);
 
   return (

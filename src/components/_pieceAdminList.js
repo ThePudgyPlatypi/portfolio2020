@@ -9,12 +9,13 @@ import GetKeyByValue from "../helpers/getKeyByValue";
 import UpdateMultipleInput from "./_updateMultipleInput";
 import { Grid } from "@material-ui/core";
 import DeletePiece from "./_deletePiece";
+import UpdateSelectInput from "../components/_updateSelectInput";
 
 const PieceAdminList = ({ pieceItem, setPieces }) => {
   return (
     <>
       <Grid container spacing={1}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <UpdateValueInput
             id={pieceItem._id}
             keyVal={
@@ -24,7 +25,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
           />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <UpdateValueText
             id={pieceItem._id}
             keyVal={
@@ -34,6 +35,19 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
             }
             value={pieceItem.title ? pieceItem.title : ""}
             setPieces={setPieces}
+          />
+        </Grid>
+
+        <Grid item xs={4}>
+          <UpdateSelectInput
+            id={pieceItem._id}
+            keyVal={
+              pieceItem.category
+                ? GetKeyByValue(pieceItem, pieceItem.category)
+                : "Category"
+            }
+            selections={["Web", "Art", "Music"]}
+            value={pieceItem.category ? pieceItem.category : ""}
           />
         </Grid>
 
@@ -108,7 +122,13 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
         </Grid>
 
         <Grid item xs={6}>
-          <UpdateMultipleInput features={pieceItem.features} />
+          <UpdateMultipleInput
+            id={pieceItem._id}
+            keyVal={ pieceItem.features
+            ? GetKeyByValue(pieceItem, pieceItem.features)
+            : "Features" }
+            value={pieceItem.features ? pieceItem.features : []}
+          />
         </Grid>
 
         <Grid item xs={6}>
