@@ -15,7 +15,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
   return (
     <>
       <Grid container spacing={1}>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <UpdateValueInput
             id={pieceItem._id}
             keyVal={
@@ -25,7 +25,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
           />
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <UpdateValueText
             id={pieceItem._id}
             keyVal={
@@ -38,7 +38,17 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
           />
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={3}>
+          <UpdateValueInput
+            id={pieceItem._id}
+            keyVal={
+              pieceItem.link ? GetKeyByValue(pieceItem, pieceItem.link) : "Link"
+            }
+            value={pieceItem.link ? pieceItem.link : ""}
+          />
+        </Grid>
+
+        <Grid item xs={3}>
           <UpdateSelectInput
             id={pieceItem._id}
             keyVal={
@@ -124,9 +134,11 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
         <Grid item xs={6}>
           <UpdateMultipleInput
             id={pieceItem._id}
-            keyVal={ pieceItem.features
-            ? GetKeyByValue(pieceItem, pieceItem.features)
-            : "Features" }
+            keyVal={
+              pieceItem.features
+                ? GetKeyByValue(pieceItem, pieceItem.features)
+                : "Features"
+            }
             value={pieceItem.features ? pieceItem.features : []}
           />
         </Grid>

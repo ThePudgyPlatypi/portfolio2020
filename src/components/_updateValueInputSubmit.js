@@ -2,11 +2,28 @@ import React, { useState, useEffect } from "react";
 import updateField from "../helpers/updateField";
 import { TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import Chip from "@material-ui/core/Chip";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(0.5),
+    },
+  },
+  icon: {
+    color: "red",
+  },
+}));
 
 const UpdateValueInputSubmit = ({ id, keyVal, value, statePasser }) => {
+  const classes = useStyles();
   const [updatedPiece, setUpdatedPiece] = useState(value);
   const [inputVal, setInputVal] = useState();
-  const [features, setFeatures] = useState();
 
   const handleClick = (event) => {
     setUpdatedPiece((prevState) => [...prevState, inputVal]);
@@ -30,11 +47,24 @@ const UpdateValueInputSubmit = ({ id, keyVal, value, statePasser }) => {
   return (
     <>
       <div>
-        <ul>
+        <div className={classes.root}>
           {Array.isArray(updatedPiece)
-            ? updatedPiece.map((value, key) => <li key={key}>{value}</li>)
+            ? updatedPiece.map((value, key) => (
+                <Chip
+                  key={key}
+                  label={value}
+                  onDelete={() => {
+                    setUpdatedPiece(
+                      updatedPiece.filter(
+                        (updatedPiece) => updatedPiece !== value
+                      )
+                    );
+                  }}
+                  variant="outlined"
+                />
+              ))
             : "There are no features yet"}
-        </ul>
+        </div>
         <TextField
           id={`${id}-value-input`}
           label={keyVal}
@@ -44,11 +74,7 @@ const UpdateValueInputSubmit = ({ id, keyVal, value, statePasser }) => {
           }}
           onKeyPress={handleEnter}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleClick}
-        >
+        <Button variant="contained" color="primary" onClick={handleClick}>
           Submit
         </Button>
       </div>

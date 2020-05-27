@@ -92,7 +92,6 @@ const UpdateImageGrid = ({ images, id, keyVal }) => {
                   titlePosition="top"
                   actionIcon={
                     <IconButton aria-label={`star`} className={classes.icon} onClick={() => {
-                      // let deleteMe = thumbnails.indexOf(value);
                       setThumbnails(thumbnails.filter((thumbnail) => thumbnail !== value));
                     }}>
                       <DeleteForeverIcon />
