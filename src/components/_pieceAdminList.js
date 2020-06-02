@@ -7,7 +7,7 @@ import UpdateImageGrid from "./_udpateImageGrid";
 import UpdateRichText from "./_udpateRichText";
 import GetKeyByValue from "../helpers/getKeyByValue";
 import UpdateMultipleInput from "./_updateMultipleInput";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import DeletePiece from "./_deletePiece";
 import UpdateSelectInput from "../components/_updateSelectInput";
 
@@ -17,6 +17,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
       <Grid container spacing={1}>
         <Grid item xs={3}>
           <UpdateValueInput
+            coll="pieces"
             id={pieceItem._id}
             keyVal={
               pieceItem.name ? GetKeyByValue(pieceItem, pieceItem.name) : "Name"
@@ -27,6 +28,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
 
         <Grid item xs={3}>
           <UpdateValueText
+            coll="pieces"
             id={pieceItem._id}
             keyVal={
               pieceItem.title
@@ -40,6 +42,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
 
         <Grid item xs={3}>
           <UpdateValueInput
+            coll="pieces"
             id={pieceItem._id}
             keyVal={
               pieceItem.link ? GetKeyByValue(pieceItem, pieceItem.link) : "Link"
@@ -50,6 +53,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
 
         <Grid item xs={3}>
           <UpdateSelectInput
+            coll="pieces"
             id={pieceItem._id}
             keyVal={
               pieceItem.category
@@ -61,7 +65,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <Grid
             container
             spacing={1}
@@ -72,7 +76,11 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
             wrap="nowrap"
           >
             <Grid item>
+              <Typography variant="h6" align="center">
+                Upload Thumbnail
+              </Typography>
               <UpdateFileUpload
+                coll="pieces"
                 imageSRC={pieceItem.thumbnail ? pieceItem.thumbnail : ""}
                 id={pieceItem._id}
                 keyVal={
@@ -85,8 +93,40 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
           </Grid>
         </Grid>
 
+        <Grid item xs={6}>
+          <Grid
+            container
+            spacing={1}
+            direction="row"
+            justify="center"
+            alignItems="center"
+            alignContent="center"
+            wrap="nowrap"
+          >
+            <Grid item>
+              <Typography variant="h6" align="center">
+                Upload Header Image
+              </Typography>
+              <UpdateFileUpload
+                coll="pieces"
+                imageSRC={pieceItem.header ? pieceItem.header : ""}
+                id={pieceItem._id}
+                keyVal={
+                  pieceItem.header
+                    ? GetKeyByValue(pieceItem, pieceItem.header)
+                    : "header"
+                }
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+
         <Grid item xs={12}>
+          <Typography variant="h6" align="center">
+            Upload Images
+          </Typography>
           <UpdateImageGrid
+            coll="pieces"
             images={pieceItem.images ? pieceItem.images : []}
             id={pieceItem._id}
             keyVal={
@@ -99,6 +139,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
 
         <Grid item xs={6}>
           <UpdateValueText
+            coll="pieces"
             id={pieceItem._id}
             keyVal={
               pieceItem.alt ? GetKeyByValue(pieceItem, pieceItem.alt) : "alt"
@@ -109,6 +150,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
 
         <Grid item xs={6}>
           <UpdateValueText
+            coll="pieces"
             id={pieceItem._id}
             keyVal={
               pieceItem.shortDescription
@@ -121,6 +163,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
 
         <Grid item xs={12}>
           <UpdateRichText
+            coll="pieces"
             id={pieceItem._id}
             keyVal={
               pieceItem.longDescription
@@ -133,6 +176,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
 
         <Grid item xs={6}>
           <UpdateMultipleInput
+            coll="pieces"
             id={pieceItem._id}
             keyVal={
               pieceItem.features
@@ -145,10 +189,10 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
 
         <Grid item xs={6}>
           <UpdateValueCheckbox
+            coll="pieces"
             id={pieceItem._id}
             keyVal="featured"
             value={pieceItem.featured ? pieceItem.featured : false}
-            setPieces={setPieces}
           />
         </Grid>
 

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateValueInputSubmit = ({ id, keyVal, value, statePasser }) => {
+const UpdateValueInputSubmit = ({ coll, id, keyVal, value, statePasser }) => {
   const classes = useStyles();
   const [updatedPiece, setUpdatedPiece] = useState(value);
   const [inputVal, setInputVal] = useState();
@@ -37,7 +37,7 @@ const UpdateValueInputSubmit = ({ id, keyVal, value, statePasser }) => {
   };
 
   useEffect(() => {
-    updateField(id, keyVal, updatedPiece);
+    updateField(coll, id, keyVal, updatedPiece);
   }, [updatedPiece]);
 
   // useEffect(() => {

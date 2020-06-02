@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
-import FetchData from "../helpers/fetchData";
+import FetchDataReturn from "../helpers/fetchDataReturn";
 
 const UpdateValueInput = ({ setPieces }) => {
   const [newPiece, setNewPiece] = useState("");
@@ -24,7 +24,8 @@ const UpdateValueInput = ({ setPieces }) => {
       },
     });
     console.log(result);
-    FetchData("/api/pieces", setPieces);
+    const fetchNSet = await FetchDataReturn("/api/pieces");
+    setPieces((prevState) => ({...prevState, pieces: fetchNSet}));
     setNewPiece("");
   };
 

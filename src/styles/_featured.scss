@@ -1,13 +1,7 @@
-.featured-link {
-    color: $dark;
 
-    &:hover {
-        color: $dark;
-    }
-}
 
 .featured-image {
-    min-height: 200px;
+    max-height: 200px;
 }
 
 .featured-wrapper {
@@ -22,8 +16,6 @@
         overflow: hidden;
         // height: 200px;
         // width: 200px;
-
-        
     }
 
     .featured-desc-wrapper {

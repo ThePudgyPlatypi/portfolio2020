@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import UpdateField from "../helpers/updateField";
 import { TextField } from "@material-ui/core";
 
-const UpdateValueInput = ({ id, keyVal, value, statePasser }) => {
+const UpdateValueInput = ({coll, id, keyVal, value, statePasser }) => {
   const [updatedPiece, setUpdatedPiece] = useState(value);
 
   useEffect(() => {
-    UpdateField(id, keyVal, updatedPiece);
+    UpdateField(coll, id, keyVal, updatedPiece);
   }, [updatedPiece]);
 
   return (
     <>
       <TextField
-        id={id}
+        id={`${id}-${keyVal}`}
         label={keyVal}
         value={updatedPiece}
         variant="outlined"

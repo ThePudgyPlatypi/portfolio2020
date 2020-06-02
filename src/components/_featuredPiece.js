@@ -8,7 +8,7 @@ import {  makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   featured_image: {
-    height: 300,
+    height: 200,
     objectFit: 'contain',
   },
 });
@@ -30,7 +30,7 @@ const FeaturedPiece = ({ piece }) => {
           </Grid>
 
           <Grid item md={7} xs={12}>
-            <Typography variant="h4" color="initial">
+            <Typography variant="h6" color="initial">
               {piece.title}
             </Typography>
             <Typography variant="body2" color="initial">

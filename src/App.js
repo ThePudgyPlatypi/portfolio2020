@@ -7,9 +7,8 @@ import ArtPage from "./pages/ArtPage";
 import DesignPage from "./pages/DesignPage";
 import MusicPage from "./pages/MusicPage";
 import PiecePage from "./pages/PiecePage";
-// import NavBar from "./navBar";
+import NavBar from "./navBar";
 import AdminPage from "./pages/AdminPage";
-import LabelBottomNavigation from "./tempNav";
 import { useAuth0 } from "./react-auth0-spa";
 import history from "./utils/history";
 import PrivateRoute from "./components/_privateRoute";
@@ -24,8 +23,7 @@ function App() {
   return (
     <Router history={history}>
       <div className="body">
-        {/* <NavBar /> */}
-        <LabelBottomNavigation />
+        <NavBar />
         <Switch>
           <Route path="/" component={HomePage} exact />
           <Route path="/web" component={WebPage} />

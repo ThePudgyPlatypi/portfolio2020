@@ -5,6 +5,7 @@ import {
   GridList,
   GridListTile,
   GridListTileBar,
+  Typography
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateImageGrid = ({ images, id, keyVal }) => {
+const UpdateImageGrid = ({ coll, images, id, keyVal }) => {
   const classes = useStyles();
   const [imgFiles, setImgFiles] = useState([]);
   const [uploads, setUploads] = useState(0);
@@ -75,60 +76,87 @@ const UpdateImageGrid = ({ images, id, keyVal }) => {
   }, [uploads]);
 
   useEffect(() => {
-    updateField(id, keyVal, thumbnails, (body) => {
-      console.log(`parent object after imageArr is stored: ${body}`)
+    updateField(coll, id, keyVal, thumbnails, (body) => {
+      console.log(`parent object after imageArr is stored: ${body}`);
     });
   }, [thumbnails]);
 
   return (
     <>
-      <Grid container justify="center">
-        <div className={classes.root}>
+      <Grid
+        container
+        spacing={1}
+        direction="column"
+        justify="center"
+        alignItems="center"
+        alignContent="center"
+        wrap="nowrap"
+      >
+        <Grid item className={classes.root} xs={12}>
           <GridList cellHeight={150} className={classes.gridList} cols={3}>
-            {Array.isArray(thumbnails) ? thumbnails.map((value, key) => (
-              <GridListTile key={key} cols={1}>
-                <img src={value} alt="" />
-                <GridListTileBar
-                  titlePosition="top"
-                  actionIcon={
-                    <IconButton aria-label={`star`} className={classes.icon} onClick={() => {
-                      setThumbnails(thumbnails.filter((thumbnail) => thumbnail !== value));
-                    }}>
-                      <DeleteForeverIcon />
-                    </IconButton>
-                  }
-                  actionPosition="left"
-                  className={classes.titleBar}
-                />
-              </GridListTile>
-            )) : []}
+            {Array.isArray(thumbnails)
+              ? thumbnails.map((value, key) => (
+                  <GridListTile key={key} cols={1}>
+                    <img src={value} alt="" />
+                    <GridListTileBar
+                      titlePosition="top"
+                      actionIcon={
+                        <IconButton
+                          aria-label={`star`}
+                          className={classes.icon}
+                          onClick={() => {
+                            setThumbnails(
+                              thumbnails.filter(
+                                (thumbnail) => thumbnail !== value
+                              )
+                            );
+                          }}
+                        >
+                          <DeleteForeverIcon />
+                        </IconButton>
+                      }
+                      actionPosition="left"
+                      className={classes.titleBar}
+                    />
+                  </GridListTile>
+                ))
+              : []}
           </GridList>
-        </div>
+        </Grid>
+        <Grid
+          container
+          spacing={1}
+          direction="column"
+          justify="center"
+          alignItems="center"
+          alignContent="center"
+          wrap="nowrap"
+        >
+          <Grid item xs={12}>
+            <input
+              accept="image/*"
+              multiple
+              id="select"
+              type="file"
+              name="file"
+              onChange={(event) => {
+                setImgFiles(event.target.files);
+              }}
+            />
 
-        <Grid item xs={12}>
-          <input
-            accept="image/*"
-            multiple
-            id="select"
-            type="file"
-            name="file"
-            onChange={(event) => {
-              setImgFiles(event.target.files);
-            }}
-          />
-
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            component="span"
-            onClick={(event) => {
-              event.preventDefault();
-              setUploads(imgFiles);
-            }}
-          >
-            Upload
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              component="span"
+              onClick={(event) => {
+                event.preventDefault();
+                setUploads(imgFiles);
+              }}
+            >
+              Upload
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </>

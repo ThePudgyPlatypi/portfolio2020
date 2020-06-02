@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateSelectInput = ({id, keyVal, selections, value }) => {
+const UpdateSelectInput = ({coll, id, keyVal, selections, value }) => {
   const [select, setSelect] = useState(value);
   const classes = useStyles();
 
   useEffect(() => {
     console.log(select);
-    updateField(id, keyVal, select, (body) => {
+    updateField(coll, id, keyVal, select, (body) => {
         // console.log(body.category);
     })
   }, [select]);

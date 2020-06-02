@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import UpdateValueInputSubmit from "./_updateValueInputSubmit";
-import updateField from "../helpers/updateField";
-import Icon from "@material-ui/core/Icon";
 
-const UpdateMultipleInput = ({ id, keyVal, value }) => {
+const UpdateMultipleInput = ({ coll, id, keyVal, value }) => {
 
   return (
     <>
-     
-      <UpdateValueInputSubmit id={id} keyVal={keyVal} value={value} />
+      <UpdateValueInputSubmit coll={coll} id={id} keyVal={keyVal} value={value} />
     </>
   );
 };

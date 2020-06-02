@@ -1,19 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import UpdateField from "../helpers/updateField";
 import { TextField } from "@material-ui/core";
-import FetchData from '../helpers/fetchData';
+import FetchData from "../helpers/fetchData";
 
-const UpdateValueText = ({ id, keyVal, value, setPieces }) => {
+const UpdateValueText = ({ coll, id, keyVal, value, setPieces }) => {
   const [updatedPiece, setUpdatedPiece] = useState(value);
 
-  useEffect( () => {
-      UpdateField(id, keyVal, updatedPiece);
-      if(keyVal === "Title") { document.getElementById(`${id}-title`).textContent = updatedPiece; }
+  useEffect(() => {
+    UpdateField(coll, id, keyVal, updatedPiece);
+    if (keyVal === "Title") {
+      document.getElementById(`${id}-title`).textContent = updatedPiece;
+    }
   }, [updatedPiece]);
 
   return (
     <>
-    <TextField
+      <TextField
         id={id}
         multiline
         fullWidth
