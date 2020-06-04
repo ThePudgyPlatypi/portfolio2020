@@ -5,12 +5,13 @@ import {
   GridList,
   GridListTile,
   GridListTileBar,
-  Typography
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import InfoIcon from "@material-ui/icons/Info";
 import { makeStyles } from "@material-ui/core/styles";
 import updateField from "../helpers/updateField";
+import ImageDetails from "../components/_imageDetails";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 450,
+    width: "100%",
+    height: "auto",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
   },
@@ -32,16 +33,27 @@ const useStyles = makeStyles((theme) => ({
       "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
   icon: {
-    color: "red",
+    color: "rgba(237, 237, 237, 0.8)",
   },
 }));
 
 const UpdateImageGrid = ({ coll, images, id, keyVal }) => {
   const classes = useStyles();
-  const [imgFiles, setImgFiles] = useState([]);
+  const [imgFiles, setImgFiles] = useState([{}]);
   const [uploads, setUploads] = useState(0);
   const [thumbnails, setThumbnails] = useState(images);
+  const [imageDetails, setImageDetails] = useState();
+  const [open, setOpen] = useState(false);
 
+  // image detail functions
+  let setDetails = () => {};
+
+  const handleClickOpen = (value) => {
+    setImageDetails(value);
+    setOpen(true);
+  };
+
+  // Does what it says
   let postData = async (url, value, callback) => {
     const body = await fetch(url, {
       method: "post",
@@ -55,6 +67,7 @@ const UpdateImageGrid = ({ coll, images, id, keyVal }) => {
     }
   };
 
+  // posting up the selected files
   useEffect(() => {
     if (uploads) {
       let formData = new FormData();
@@ -68,16 +81,17 @@ const UpdateImageGrid = ({ coll, images, id, keyVal }) => {
         result.file.forEach((value, index, array) => {
           setThumbnails((prevState) => [
             ...prevState,
-            `${process.env.REACT_APP_SERVER}${value.path.substring(6)}`,
+            { images: `${process.env.REACT_APP_SERVER}${value.path.substring(6)}` },
           ]);
         });
       });
     }
   }, [uploads]);
 
+  // updating the actual page so i can see the new image
   useEffect(() => {
     updateField(coll, id, keyVal, thumbnails, (body) => {
-      console.log(`parent object after imageArr is stored: ${body}`);
+      document.getElementById("selectMultipleImages").value = "";
     });
   }, [thumbnails]);
 
@@ -93,27 +107,39 @@ const UpdateImageGrid = ({ coll, images, id, keyVal }) => {
         wrap="nowrap"
       >
         <Grid item className={classes.root} xs={12}>
-          <GridList cellHeight={150} className={classes.gridList} cols={3}>
+          <GridList cellHeight={300} className={classes.gridList} cols={2}>
             {Array.isArray(thumbnails)
               ? thumbnails.map((value, key) => (
-                  <GridListTile key={key} cols={1}>
-                    <img src={value} alt="" />
+                  <GridListTile key={key} cols={value.details ? value.details.cols : 1}>
+                    <img src={value.images} alt="" />
                     <GridListTileBar
                       titlePosition="top"
                       actionIcon={
-                        <IconButton
-                          aria-label={`star`}
-                          className={classes.icon}
-                          onClick={() => {
-                            setThumbnails(
-                              thumbnails.filter(
-                                (thumbnail) => thumbnail !== value
-                              )
-                            );
-                          }}
-                        >
-                          <DeleteForeverIcon />
-                        </IconButton>
+                        <>
+                          <IconButton
+                            aria-label={`delete`}
+                            className={classes.icon}
+                            onClick={() => {
+                              setThumbnails(
+                                thumbnails.filter(
+                                  (thumbnail) => thumbnail !== value
+                                )
+                              );
+                            }}
+                          >
+                            <DeleteForeverIcon />
+                          </IconButton>
+
+                          <IconButton
+                            aria-label={`information`}
+                            className={classes.icon}
+                            onClick={() => {
+                              handleClickOpen(value);
+                            }}
+                          >
+                            <InfoIcon />
+                          </IconButton>
+                        </>
                       }
                       actionPosition="left"
                       className={classes.titleBar}
@@ -136,7 +162,7 @@ const UpdateImageGrid = ({ coll, images, id, keyVal }) => {
             <input
               accept="image/*"
               multiple
-              id="select"
+              id="selectMultipleImages"
               type="file"
               name="file"
               onChange={(event) => {
@@ -158,6 +184,7 @@ const UpdateImageGrid = ({ coll, images, id, keyVal }) => {
             </Button>
           </Grid>
         </Grid>
+        <ImageDetails open={open} setOpen={setOpen} target={imageDetails} setThumbnails={setThumbnails}/>
       </Grid>
     </>
   );

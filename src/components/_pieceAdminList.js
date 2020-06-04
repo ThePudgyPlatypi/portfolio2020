@@ -86,7 +86,7 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
                 keyVal={
                   pieceItem.thumbnail
                     ? GetKeyByValue(pieceItem, pieceItem.thumbnail)
-                    : "images"
+                    : "thumbnail"
                 }
               />
             </Grid>

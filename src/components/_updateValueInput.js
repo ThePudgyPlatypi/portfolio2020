@@ -15,7 +15,7 @@ const UpdateValueInput = ({coll, id, keyVal, value, statePasser }) => {
         id={`${id}-${keyVal}`}
         label={keyVal}
         value={updatedPiece}
-        variant="outlined"
+        size="small"
         onChange={(event) => {
           statePasser ? statePasser(event.target.value) : setUpdatedPiece(event.target.value);
         }}

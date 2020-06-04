@@ -21,7 +21,7 @@ const UpdateValueText = ({ coll, id, keyVal, value, setPieces }) => {
         fullWidth
         label={keyVal}
         value={updatedPiece}
-        variant="outlined"
+        size="small"
         onChange={(event) => {
           setUpdatedPiece(event.target.value);
         }}
