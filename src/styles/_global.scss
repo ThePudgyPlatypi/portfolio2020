@@ -1,6 +1,7 @@
 html, body {
   font-family: 'Roboto', sans-serif;
   color: $dark;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -10,6 +11,14 @@ h1, h2, h3, h4, h5, h6 {
 .body {
   background-color: $white; 
   color: $dark;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 .description {

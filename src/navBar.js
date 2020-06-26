@@ -53,6 +53,11 @@ export default function LabelBottomNavigation() {
             Music
           </MenuItem>
         </Link>
+        <Link to="/resume">
+          <MenuItem onClick={handleClose} value="resume">
+            Resume
+          </MenuItem>
+        </Link>
         {isAuthenticated && (
           <Link to="/cs-admin">
             <MenuItem onClick={handleClose} value="admin">

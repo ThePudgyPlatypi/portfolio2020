@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Featured from "../components/_featureList";
-import content from "../resources/siteContent";
-import IconList from "../components/_iconList";
-import { Grid, Typography, Container, Box } from "@material-ui/core";
+import { Grid, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import FetchDataReturn from "../helpers/fetchDataReturn";
 import IntroInfo from "../components/_introInfo";
@@ -15,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = ({ match }) => {
   const classes = useStyles();
-  const name = match.params.name;
   const [homeData, setHomeData] = useState({ featured: [], info: [] });
 
   useEffect(() => {

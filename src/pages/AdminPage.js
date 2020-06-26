@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import FetchData from "../helpers/fetchData";
 import FetchDataReturn from "../helpers/fetchDataReturn";
 import PieceAdmin from "../components/_pieceAdmin";
-import { Box, Container, Typography } from "@material-ui/core";
+import { Container, LinearProgress } from "@material-ui/core";
 import AdminBar from "../components/_adminBar";
 import InfoEditor from "../components/_infoEditor";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,29 +12,29 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 100,
   },
   strongCenter: {
-    display: 'block',
-    textAlign: 'center',
-  }
+    display: "block",
+    textAlign: "center",
+  },
 }));
 
 const AdminPage = () => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState({pieces: null, info: null});
+  const [data, setData] = useState({ pieces: null, info: null });
 
   useEffect(() => {
     const getAll = async () => {
       const p = await FetchDataReturn("/api/pieces");
       const i = await FetchDataReturn("/api/info");
-      setData({pieces: p, info: i});
+      setData({ pieces: p, info: i });
       setIsLoading(false);
-    }
+    };
 
     getAll();
   }, []);
 
   return isLoading ? (
-    <Box>Loading...</Box>
+    <LinearProgress />
   ) : (
     <>
       <Container className={classes.root} maxWidth="lg">

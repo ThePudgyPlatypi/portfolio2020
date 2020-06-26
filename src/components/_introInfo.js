@@ -8,13 +8,11 @@ const IntroInfo = ({ info }) => {
     setData(info);
   }, [info]);
 
-  useEffect(() => {
-      if (data[0]) {
-        document.getElementById("intro").innerHTML = data[0].intro;
-      }
-  }, [data]);
+  function introParagraph() {
+    return { __html: data[0] ? data[0].intro : "" };
+  }
 
-  return data ? (
+  return data[0] ? (
     <Grid item xs={12} md={6}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
@@ -23,11 +21,13 @@ const IntroInfo = ({ info }) => {
           </Typography>
 
           <Box>
-            <Typography variant="body1" color="initial" id="intro"></Typography>
+            <Typography
+              variant="body1"
+              color="initial"
+              id="intro"
+              dangerouslySetInnerHTML={introParagraph()}
+            ></Typography>
           </Box>
-          {/* <Box>
-            <IconList links={content[3].links} />
-          </Box> */}
         </Grid>
       </Grid>
     </Grid>

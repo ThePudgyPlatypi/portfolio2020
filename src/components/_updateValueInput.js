@@ -7,7 +7,7 @@ const UpdateValueInput = ({coll, id, keyVal, value, statePasser }) => {
 
   useEffect(() => {
     UpdateField(coll, id, keyVal, updatedPiece);
-  }, [updatedPiece]);
+  }, [updatedPiece, coll, id, keyVal]);
 
   return (
     <>

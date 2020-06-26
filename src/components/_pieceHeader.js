@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PieceHeader = ({ background }) => {
   const classes = useStyles();
-  return (
+  return background ? (
     <Grid className={classes.root} container>
       <Grid item xs={12}>
         <div
@@ -22,7 +22,7 @@ const PieceHeader = ({ background }) => {
         ></div>
       </Grid>
     </Grid>
-  );
+  ) : null;
 };
 
 export default PieceHeader;

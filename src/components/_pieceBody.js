@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import { Grid, Typography, Chip } from "@material-ui/core";
+import React from "react";
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import UpdateValueInputSubmit from "../components/_updateValueInputSubmit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.up("md")]: {
       maxWidth: "50%",
-      marginLeft: 'calc(50% - 100px)',
-      marginTop: '-25vh',
-      padding: '50px'
+      marginLeft: "calc(50% - 100px)",
+      marginTop: "-25vh",
+      padding: "50px",
     },
   },
   features: {
@@ -29,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
 const PieceBody = ({ title, features, link, description }) => {
   const classes = useStyles();
 
-  useEffect(() => {
-    document.getElementById("long-description").innerHTML = description;
-  }, []);
+  function descriptionSet() {
+    return { __html: description };
+  }
 
   return (
     <div className={classes.root}>
@@ -43,13 +44,22 @@ const PieceBody = ({ title, features, link, description }) => {
           <Typography variant="h6">Vist</Typography>
         </a>
       ) : null}
-      <strong>Featured Tech's</strong>
+
       <div className={classes.features}>
-        {features.map((value, key) => (
-          <Chip key={key} label={value} color="primary" />
-        ))}
+        {features ? (
+          <UpdateValueInputSubmit
+            coll="pieces"
+            id={null}
+            keyVal="features"
+            value={features}
+          />
+        ) : null}
       </div>
-      <Typography variant="body1" id="long-description"></Typography>
+      <Typography
+        variant="body1"
+        id="long-description"
+        dangerouslySetInnerHTML={descriptionSet()}
+      ></Typography>
     </div>
   );
 };

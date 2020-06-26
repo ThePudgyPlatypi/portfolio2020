@@ -21,11 +21,8 @@ const UpdateSelectInput = ({coll, id, keyVal, selections, value }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log(select);
-    updateField(coll, id, keyVal, select, (body) => {
-        // console.log(body.category);
-    })
-  }, [select]);
+    updateField(coll, id, keyVal, select)
+  }, [select, coll, id, keyVal]);
 
   return (
     <FormControl className={classes.formControl}>

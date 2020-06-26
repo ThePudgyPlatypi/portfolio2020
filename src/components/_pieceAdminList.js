@@ -1,10 +1,10 @@
 import React from "react";
-import UpdateValueCheckbox from "./_udpateValueCheckbox";
+import UpdateValueCheckbox from "./_updateValueCheckbox";
 import UpdateValueInput from "./_updateValueInput";
 import UpdateValueText from "./_updateValueText";
 import UpdateFileUpload from "./_updateFileUpload";
-import UpdateImageGrid from "./_udpateImageGrid";
-import UpdateRichText from "./_udpateRichText";
+import UpdateImageGrid from "./_updateImageGrid";
+import UpdateRichText from "./_updateRichText";
 import GetKeyByValue from "../helpers/getKeyByValue";
 import UpdateMultipleInput from "./_updateMultipleInput";
 import { Grid, Typography } from "@material-ui/core";
@@ -36,7 +36,6 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
                 : "Title"
             }
             value={pieceItem.title ? pieceItem.title : ""}
-            setPieces={setPieces}
           />
         </Grid>
 
@@ -125,16 +124,26 @@ const PieceAdminList = ({ pieceItem, setPieces }) => {
           <Typography variant="h6" align="center">
             Upload Images
           </Typography>
-          <UpdateImageGrid
-            coll="pieces"
-            images={pieceItem.images ? pieceItem.images : []}
-            id={pieceItem._id}
-            keyVal={
-              pieceItem.images
-                ? GetKeyByValue(pieceItem, pieceItem.images)
-                : "images"
-            }
-          />
+          <Grid
+            container
+            spacing={1}
+            direction="column"
+            justify="center"
+            alignItems="center"
+            alignContent="center"
+            wrap="nowrap"
+          >
+            <UpdateImageGrid
+              coll="pieces"
+              images={pieceItem.images ? pieceItem.images : []}
+              id={pieceItem._id}
+              keyVal={
+                pieceItem.images
+                  ? GetKeyByValue(pieceItem, pieceItem.images)
+                  : "images"
+              }
+            />
+          </Grid>
         </Grid>
 
         <Grid item xs={6}>
